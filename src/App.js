@@ -1,6 +1,7 @@
 import React from 'react'
 import logo from './logo.svg';
 import './App.css';
+import RandomJoke from './ChuckInput.js'
 
 const ALLCATEGORIESURL = 'https://api.chucknorris.io/jokes/categories'
 const RANDOMJOKEBYCATURL = 'https://api.chucknorris.io/jokes/random?category=' // remember to fill this
@@ -71,18 +72,9 @@ function App() {
           <Logo
             // ...
           />
-          <input
-            type="search"
-            id="search" name="search"
-            placeholder="Enter keyword here"
-            // ...
+          <RandomJoke
           />
-          <button
-            className="Search-Button"
-            // ...
-          >
-            <code>CLICK TO SEARCH!</code>
-          </button>
+          
           <code>or: </code>
           <CategoriesList
             // ...
@@ -111,7 +103,7 @@ function App() {
           {/* <Joke ... /> */}
         </div>
         <div className="footer">
-        <code>Esame di React per cfp-futura. Grazie ad <a href="https://api.chucknorris.io">api.chucknorris.io</a> per l'immagine e le api. Docente: Vito Vitale. Studente: </code>
+        <code>Esame di React per cfp-futura. Grazie ad <a href="https://api.chucknorris.io">api.chucknorris.io</a> per l'immagine e le api. Docente: Vito Vitale. Studente: Fernando Morani </code>
         </div>
       </div>
     );
