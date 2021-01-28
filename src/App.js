@@ -30,7 +30,9 @@ const CategoryButton = ({ title, onClick }) => {
 
 
 const CategoriesList = ({ categories, onCategoryClick }) => {
-  return null
+  return (
+    (categories !== null) ? (<p>{categories[0]}</p>) : (<></>)
+  )
   // per ciascun elemento di 'categories' renderizzare il componente <CategoryButton />
 }
 
@@ -43,13 +45,6 @@ const Joke = ({ value, categories }) => {
        </span>
       </div>
   )
-  // <div className="Joke">
-  //   <code className="Joke-Value">{value}</code>
-  //     per ciascun elemento di 'categories', renderizzare:
-  //     <span className="Selected-Cat" ... >
-  //       <code>{* QUI LA STRINGA DELLA SINGOLA CATEGORIA *}</code>
-  //     </span>
-  // </div>
 }
 
 function App() {
@@ -57,9 +52,17 @@ function App() {
   const [isloading, setIsloading] = useState(false); // to be used for spinning the logo
   const [first,setFirst] = useState("");  // to be use with first quote
   const [category,setCategory] = useState("");
+  const [categories,setCategories] = useState([]);
   const onloading = (isloading) => {
     console.log("is loading: ", isloading);
     setIsloading(isloading);
+  }
+
+  // getAllCategories
+  // funzione che deve recuperare l'array di tutte le categorie esistenti e salvarlo
+  const getCategories = (areCategories) => {
+    console.log("Get the categories: ", areCategories);
+    setCategories(areCategories);
   }
 
   const getFirst = (isFirst) => {
@@ -70,8 +73,7 @@ function App() {
     }
   }
 
-  // getAllCategories
-  // funzione che deve recuperare l'array di tutte le categorie esistenti e salvarlo
+  
 
   // onCategoryClick
   // funzione richiamata al click del componente CategoryButton
@@ -86,7 +88,13 @@ function App() {
   // onInputTextChange
   // handler per l'input di testo
 
-  // qui i lifecycle methods
+  // qui USEFFECTS
+
+  useEffect(() => {
+    return () => {
+      console.log("categories Array changed");
+    };
+  }, [categories]); 
 
     return (
       <div className="App">
@@ -97,10 +105,11 @@ function App() {
             <RandomJoke loadMore = {onloading}
             getFirst = {getFirst}
             errFunction = {launchErrorAlert}
+            getCategory= {getCategories}
             />
           <code>or: </code>
           <CategoriesList
-            // ...
+            categories = {categories}
           />
         </div>
         <div className="Content">

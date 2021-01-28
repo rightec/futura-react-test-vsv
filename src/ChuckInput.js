@@ -5,7 +5,7 @@ const CI_JOKEBYCAT_URL = 'https://api.chucknorris.io/jokes/search?query='
 
 
 
-export default function RandomJoke({ more, loadMore, getFirst,errFunction }) {
+export default function RandomJoke({ more, loadMore, getFirst,errFunction,getCategory }) {
   const [joke, setJoke] = useState("");
   const [searchbox,setSearchbox] = useState("");
   const [urltofetch, setUrltofetch] = useState(CI_CATEG_URL);
@@ -29,6 +29,10 @@ export default function RandomJoke({ more, loadMore, getFirst,errFunction }) {
     console.log(jsondata);
     if (jsondata.total === undefined){
         console.log ("UNDEFINED");
+        if (jsondata[0] !== undefined){
+            // This is a category
+            getCategory(jsondata);
+        } // 
     } else {
         let datalenght = jsondata.total;
         
