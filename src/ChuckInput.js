@@ -5,7 +5,7 @@ const CI_JOKEBYCAT_URL = 'https://api.chucknorris.io/jokes/search?query='
 
 
 
-export default function RandomJoke({ more, loadMore, getFirst }) {
+export default function RandomJoke({ more, loadMore, getFirst,errFunction }) {
   const [joke, setJoke] = useState("");
   const [searchbox,setSearchbox] = useState("");
   const [urltofetch, setUrltofetch] = useState(CI_CATEG_URL);
@@ -67,6 +67,7 @@ export default function RandomJoke({ more, loadMore, getFirst }) {
             } catch (err) {
                 // console.log ("Error ");
                 // console.error(err);
+                {errFunction()}
                 setPrivaterr(true);
             } finally {
                 console.log("Joke Finally fetched");

@@ -96,6 +96,7 @@ function App() {
             />
             <RandomJoke loadMore = {onloading}
             getFirst = {getFirst}
+            errFunction = {launchErrorAlert}
             />
           <code>or: </code>
           <CategoriesList
