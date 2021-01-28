@@ -5,7 +5,7 @@ const CI_JOKEBYCAT_URL = 'https://api.chucknorris.io/jokes/search?query='
 
 
 
-export default function RandomJoke({ more, loadMore }) {
+export default function RandomJoke({ more, loadMore, getFirst }) {
   const [joke, setJoke] = useState("");
   const [searchbox,setSearchbox] = useState("");
   const [urltofetch, setUrltofetch] = useState(CI_CATEG_URL);
@@ -22,6 +22,21 @@ export default function RandomJoke({ more, loadMore }) {
     console.log("Search Button clicked: ", key);
     setUrltofetch(key);
     setClicked(true);
+  }
+
+  const parseAnswer = (jsondata) => {
+    console.log(jsondata);
+    let datalenght = jsondata.total;
+    
+    if (datalenght != 0){
+        console.log(jsondata.total);
+        // Take the first
+        let firstquote = jsondata.result[0].value;
+        console.log(firstquote);
+        getFirst(firstquote);
+    } else {
+        console.log("NO DATA AVAILABLE");
+    }
   }
 
   useEffect(() => {
@@ -46,7 +61,7 @@ export default function RandomJoke({ more, loadMore }) {
                 console.error(err);
             } finally {
                 console.log("Joke fetched");
-                console.log(jsonAnswer);
+                parseAnswer(jsonAnswer);
                 setClicked(false);
                 {loadMore(false)}
             } // end finally

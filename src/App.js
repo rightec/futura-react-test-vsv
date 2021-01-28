@@ -34,7 +34,14 @@ const CategoriesList = ({ categories, onCategoryClick }) => {
 }
 
 const Joke = ({ value, categories }) => {
-  return null
+  return (
+    <div className="Joke">
+      <code className="Joke-Value">{value}</code>
+      <span className={`Dont-View-Cat${categories === "" ? "Selected-Cat" : "" }`} >
+         <code >{categories}</code>
+       </span>
+      </div>
+  )
   // <div className="Joke">
   //   <code className="Joke-Value">{value}</code>
   //     per ciascun elemento di 'categories', renderizzare:
@@ -46,11 +53,17 @@ const Joke = ({ value, categories }) => {
 
 function App() {
   // qui tutto ciò che serve al componente per essere inizializzato
-  const [isloading, setIsloading] = useState(false);
+  const [isloading, setIsloading] = useState(false); // to be used for spinning the logo
+  const [first,setFirst] = useState("");  // to be use with first quote
 
   const onloading = (isloading) => {
     console.log("is loading: ", isloading);
     setIsloading(isloading);
+  }
+
+  const getFirst = (isFirst) => {
+    console.log("Get the first: ", isFirst);
+    setFirst(isFirst);
   }
 
   // getAllCategories
@@ -78,6 +91,7 @@ function App() {
               // ...
             />
             <RandomJoke loadMore = {onloading}
+            getFirst = {getFirst}
             />
           <code>or: </code>
           <CategoriesList
@@ -105,6 +119,7 @@ function App() {
             <h2>GET RANDOM JOKE FOR SELECTED CATEGORY</h2>
           </button>
           {/* <Joke ... /> */}
+          <Joke value = {first} />
         </div>
         <div className="footer">
         <code>Esame di React per cfp-futura. Grazie ad <a href="https://api.chucknorris.io">api.chucknorris.io</a> per l'immagine e le api. Docente: Vito Vitale. Studente: Fernando Morani </code>

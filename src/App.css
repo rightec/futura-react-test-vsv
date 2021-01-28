@@ -149,6 +149,10 @@ p {
   margin: 0.5rem;
 }
 
+.Dont-View-Cat {
+  display:none;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
