@@ -27,18 +27,22 @@ export default function RandomJoke({ more, loadMore, getFirst }) {
 
   const parseAnswer = (jsondata) => {
     console.log(jsondata);
-    let datalenght = jsondata.total;
-    
-    if (datalenght != 0){
-        console.log(jsondata.total);
-        // Take the first
-        if (jsondata !== null){
-            let firstquote = jsondata.result[0].value;
-            console.log(firstquote);
-            getFirst(firstquote);
-        } //
+    if (jsondata.total === undefined){
+        console.log ("UNDEFINED");
     } else {
-        console.log("NO DATA AVAILABLE");
+        let datalenght = jsondata.total;
+        
+        if (datalenght != 0){
+            console.log(jsondata.total);
+            // Take the first
+            if (jsondata !== null){
+                let firstquote = jsondata.result[0].value;
+                console.log(firstquote);
+                getFirst(firstquote);
+            } //
+        } else {
+            console.log("NO DATA AVAILABLE");
+        }
     }
   }
 
@@ -61,8 +65,8 @@ export default function RandomJoke({ more, loadMore, getFirst }) {
                 // setJoke(value.joke);
                 } // 
             } catch (err) {
-                console.log ("Error ");
-                console.error(err);
+                // console.log ("Error ");
+                // console.error(err);
                 setPrivaterr(true);
             } finally {
                 console.log("Joke Finally fetched");
