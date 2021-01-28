@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import RandomJoke from './ChuckInput.js'
 import { UserApiRun } from './UserContext'
+import CatHide from './CatHide.js'
 
 const ALLCATEGORIESURL = 'https://api.chucknorris.io/jokes/categories'
 const RANDOMJOKEBYCATURL = 'https://api.chucknorris.io/jokes/random?category=' // remember to fill this
@@ -55,7 +56,7 @@ function App() {
   // qui tutto ciò che serve al componente per essere inizializzato
   const [isloading, setIsloading] = useState(false); // to be used for spinning the logo
   const [first,setFirst] = useState("");  // to be use with first quote
-
+  const [category,setCategory] = useState("");
   const onloading = (isloading) => {
     console.log("is loading: ", isloading);
     setIsloading(isloading);
@@ -64,6 +65,9 @@ function App() {
   const getFirst = (isFirst) => {
     console.log("Get the first: ", isFirst);
     setFirst(isFirst);
+    if (isFirst !== ""){
+      setCategory("void");
+    }
   }
 
   // getAllCategories
@@ -105,12 +109,7 @@ function App() {
             alt="chuck-logo"
           />
           <code>
-            <h2>
-              SELECTED CATEGORY:
-              <span className="Selected-Cat">
-                {/* QUI LA CATEGORIA SELEZIONATA */}
-              </span>
-            </h2>
+            {category !== "void" ? (<CatHide />) : (<></>)}
           </code>
           <button
             className="Random-Button"

@@ -11,6 +11,7 @@ export default function RandomJoke({ more, loadMore, getFirst }) {
   const [urltofetch, setUrltofetch] = useState(CI_CATEG_URL);
   const componentIsMounted = useRef(true);
   const [clicked,setClicked] = useState(false);
+  const [privaterr,setPrivaterr] = useState(false);
   let jsonAnswer = 0;
   const onChange = (event) => {
     setSearchbox(event.target.value);
@@ -31,9 +32,11 @@ export default function RandomJoke({ more, loadMore, getFirst }) {
     if (datalenght != 0){
         console.log(jsondata.total);
         // Take the first
-        let firstquote = jsondata.result[0].value;
-        console.log(firstquote);
-        getFirst(firstquote);
+        if (jsondata !== null){
+            let firstquote = jsondata.result[0].value;
+            console.log(firstquote);
+            getFirst(firstquote);
+        } //
     } else {
         console.log("NO DATA AVAILABLE");
     }
@@ -53,17 +56,21 @@ export default function RandomJoke({ more, loadMore, getFirst }) {
                 let response = await fetch(urltofetch);
                 // const { value } = asyncResponse.data;
                 jsonAnswer  = await response.json();
-
+                setPrivaterr(false);
                 if (componentIsMounted.current) {
                 // setJoke(value.joke);
                 } // 
             } catch (err) {
+                console.log ("Error ");
                 console.error(err);
+                setPrivaterr(true);
             } finally {
-                console.log("Joke fetched");
-                parseAnswer(jsonAnswer);
-                setClicked(false);
-                {loadMore(false)}
+                console.log("Joke Finally fetched");
+                if (privaterr === false){
+                    parseAnswer(jsonAnswer);
+                    setClicked(false);
+                    {loadMore(false)}
+                } //
             } // end finally
         } else {
             console.log("fetchJoke called but not executed");
