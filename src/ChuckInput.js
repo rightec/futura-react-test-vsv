@@ -33,6 +33,7 @@ export default function RandomJoke({ more, loadMore }) {
   useEffect(() => {
     async function fetchJoke() {
         if (clicked == true) {
+            {loadMore(true)}
             try {
                 let response = await fetch(urltofetch);
                 // const { value } = asyncResponse.data;
@@ -47,6 +48,7 @@ export default function RandomJoke({ more, loadMore }) {
                 console.log("Joke fetched");
                 console.log(jsonAnswer);
                 setClicked(false);
+                {loadMore(false)}
             } // end finally
         } else {
             console.log("fetchJoke called but not executed");

@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect,useRef } from 'react'
 import logo from './logo.svg';
 import './App.css';
 import RandomJoke from './ChuckInput.js'
+import { UserApiRun } from './UserContext'
 
 const ALLCATEGORIESURL = 'https://api.chucknorris.io/jokes/categories'
 const RANDOMJOKEBYCATURL = 'https://api.chucknorris.io/jokes/random?category=' // remember to fill this
@@ -13,8 +14,8 @@ const Logo = ({ loading }) => {
   return (
     <img
       src={logo}
-      alt='interactive-logo'
-      // ... 
+      className={`App-logo${loading ? ' App-logo-spinning' : ''}`}
+      alt='interactive-logo' 
     />
   )
 }
@@ -43,9 +44,14 @@ const Joke = ({ value, categories }) => {
   // </div>
 }
 
-// class App extends React.Component {
 function App() {
   // qui tutto ciò che serve al componente per essere inizializzato
+  const [isloading, setIsloading] = useState(false);
+
+  const onloading = (isloading) => {
+    console.log("is loading: ", isloading);
+    setIsloading(isloading);
+  }
 
   // getAllCategories
   // funzione che deve recuperare l'array di tutte le categorie esistenti e salvarlo
@@ -65,16 +71,14 @@ function App() {
 
   // qui i lifecycle methods
 
-  // render () {
     return (
       <div className="App">
         <div className="App-header">
-          <Logo
-            // ...
-          />
-          <RandomJoke
-          />
-          
+            <Logo loading = {isloading}
+              // ...
+            />
+            <RandomJoke loadMore = {onloading}
+            />
           <code>or: </code>
           <CategoriesList
             // ...
