@@ -10,7 +10,7 @@ export default function RandomJoke({ more, loadMore, getFirst,errFunction }) {
   const [searchbox,setSearchbox] = useState("");
   const [urltofetch, setUrltofetch] = useState(CI_CATEG_URL);
   const componentIsMounted = useRef(true);
-  const [clicked,setClicked] = useState(false);
+  const [clicked,setClicked] = useState(true);
   const [privaterr,setPrivaterr] = useState(false);
   let jsonAnswer = 0;
   const onChange = (event) => {
