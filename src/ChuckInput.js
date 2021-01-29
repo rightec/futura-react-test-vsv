@@ -58,8 +58,8 @@ export default function RandomJoke({ more, loadMore, getFirst,errFunction,getCat
 
   useEffect(() => {
     async function fetchJoke() {
-        if (clicked == true) {
-            {loadMore(true)}
+        if (clicked === true) {
+            loadMore(true)
             try {
                 let response = await fetch(urltofetch);
                 // const { value } = asyncResponse.data;
@@ -71,14 +71,14 @@ export default function RandomJoke({ more, loadMore, getFirst,errFunction,getCat
             } catch (err) {
                 // console.log ("Error ");
                 // console.error(err);
-                {errFunction()}
+                errFunction()
                 setPrivaterr(true);
             } finally {
                 console.log("Joke Finally fetched");
                 if (privaterr === false){
                     parseAnswer(jsonAnswer);
                     setClicked(false);
-                    {loadMore(false)}
+                    loadMore(false)
                 } //
             } // end finally
         } else {

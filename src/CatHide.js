@@ -1,12 +1,12 @@
 import React from "react";
 
-const CatHide = () => {
+const CatHide = (prop) => {
     return (
       <div>
         <h2>
             SELECTED CATEGORY:
             <span className="Selected-Cat">
-            {/* QUI LA CATEGORIA SELEZIONATA */}
+            {prop}
             </span>
         </h2>
       </div>

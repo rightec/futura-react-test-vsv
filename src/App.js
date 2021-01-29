@@ -22,17 +22,19 @@ const Logo = ({ loading }) => {
 }
 
 const CategoryButton = ({ title, onClick }) => {
-  return null
-  // <button className="Cat-button" ... >
-  //   <code>{title}</code>
-  // </button>
+  return (
+   <button className="Cat-button" onClick={onClick}>
+     <code>{title}</code>
+   </button>
+  )
 }
 
 
 const CategoriesList = ({ categories, onCategoryClick }) => {
-  return (
-    (categories !== null) ? (<p>{categories[0]}</p>) : (<></>)
-  )
+  return (  
+    (categories !== null) ?  
+    categories.map(product => <CategoryButton title={product} onClick={onCategoryClick}/>) : (<></>)       
+  )    
   // per ciascun elemento di 'categories' renderizzare il componente <CategoryButton />
 }
 
@@ -53,6 +55,7 @@ function App() {
   const [first,setFirst] = useState("");  // to be use with first quote
   const [category,setCategory] = useState("");
   const [categories,setCategories] = useState([]);
+  const [selectedcat,setSelectedcat] = useState("prova");
   const onloading = (isloading) => {
     console.log("is loading: ", isloading);
     setIsloading(isloading);
@@ -71,6 +74,11 @@ function App() {
     if (isFirst !== ""){
       setCategory("void");
     }
+  }
+
+  const getSingleCategory = (Event) =>{
+    console.log ("getSingleCat event", Event.target.innerText);
+    setSelectedcat(Event.target.innerText);
   }
 
   
@@ -110,6 +118,7 @@ function App() {
           <code>or: </code>
           <CategoriesList
             categories = {categories}
+            onCategoryClick = {getSingleCategory}
           />
         </div>
         <div className="Content">
@@ -119,7 +128,7 @@ function App() {
             alt="chuck-logo"
           />
           <code>
-            {category !== "void" ? (<CatHide />) : (<></>)}
+            {category !== "void" ? (<CatHide prop={selectedcat}/>) : (<></>)}
           </code>
           <button
             className="Random-Button"
