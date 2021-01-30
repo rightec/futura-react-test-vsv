@@ -2,12 +2,12 @@ import React, { useState, useEffect,useRef } from 'react'
 import logo from './logo.svg';
 import './App.css';
 import RandomJoke from './ChuckInput.js'
-import { UserApiRun } from './UserContext'
+// import { UserApiRun } from './UserContext'
 import CatHide from './CatHide.js'
 
-const ALLCATEGORIESURL = 'https://api.chucknorris.io/jokes/categories'
-const RANDOMJOKEBYCATURL = 'https://api.chucknorris.io/jokes/random?category=' // remember to fill this
-const ALLLJOKESBYKEYWORD = 'https://api.chucknorris.io/jokes/search?query=' // remember to fill this
+// const ALLCATEGORIESURL = 'https://api.chucknorris.io/jokes/categories'
+// const RANDOMJOKEBYCATURL = 'https://api.chucknorris.io/jokes/random?category=' // remember to fill this
+// const ALLLJOKESBYKEYWORD = 'https://api.chucknorris.io/jokes/search?query=' // remember to fill this
 const launchErrorAlert = () => setTimeout(() => window.alert('errore!'), 500) 
 
 // classe 'App-logo-spinning' durante il caricamento, altrimenti classe 'App-logo'
@@ -55,7 +55,8 @@ function App() {
   const [first,setFirst] = useState("");  // to be use with first quote
   const [category,setCategory] = useState("");
   const [categories,setCategories] = useState([]);
-  const [selectedcat,setSelectedcat] = useState("prova");
+  const [selectedcat,setSelectedcat] = useState("");
+  
   const onloading = (isloading) => {
     console.log("is loading: ", isloading);
     setIsloading(isloading);
@@ -107,10 +108,9 @@ function App() {
     return (
       <div className="App">
         <div className="App-header">
-            <Logo loading = {isloading}
-              // ...
-            />
-            <RandomJoke loadMore = {onloading}
+            <Logo loading = {isloading}/>
+            <RandomJoke 
+            loadMore = {onloading}
             getFirst = {getFirst}
             errFunction = {launchErrorAlert}
             getCategory= {getCategories}

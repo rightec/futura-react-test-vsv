@@ -1,6 +1,6 @@
 import React from "react";
 
-const CatHide = (prop) => {
+const CatHide = ({prop}) => {
     return (
       <div>
         <h2>
